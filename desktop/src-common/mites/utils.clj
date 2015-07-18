@@ -38,3 +38,10 @@
 (defn show
   [ent]
   (dissoc ent :hidden))
+
+(defn polar->cartesian [[distance angle]]
+  [(* distance (Math/cos angle)) (* distance (Math/sin angle))])
+
+(defn cartesian->polar [[x y]]
+  [(Math/sqrt (+ (* x x) (* y y)))
+   (Math/atan2 y x)])
