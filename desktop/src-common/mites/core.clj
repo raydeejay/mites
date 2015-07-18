@@ -19,7 +19,7 @@
     (update! screen :renderer (stage) :camera (orthographic))
     [(label "Mites!!!" (color :white))
      (assoc (create-mite) :x 400 :y 300)])
-  
+
   :on-render
   (fn [screen entities]
     (clear!)
