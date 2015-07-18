@@ -17,7 +17,7 @@
   :on-show
   (fn [screen entities]
     (update! screen :renderer (stage) :camera (orthographic))
-    [(label "Hello world!" (color :white))
+    [(label "Mites!!!" (color :white))
      (assoc (create-mite) :x 400 :y 300)])
   
   :on-render
