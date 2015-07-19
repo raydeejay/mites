@@ -13,8 +13,8 @@
 
 
 (defmulti create-mite (fn [mite-type] mite-type))
-(defmulti make-path (fn [mite] (:type mite)))
-(defmulti move-mite (fn [mite] (:type mite)))
+(defmulti make-path (fn [mite screen entities] (:type mite)))
+(defmulti move-mite (fn [mite screen entities] (:type mite)))
 
 
 ;; Basic mite
@@ -29,14 +29,14 @@
          :type type))
 
 (defmethod make-path :basic
-  [mite]
+  [mite screen entities]
   (assoc (turn mite)
          :steps (inc (rand-int 25))))
 
 (defmethod move-mite :basic
-  [mite]
+  [mite screen entities]
   (advance (if (<= (:steps mite) 0)
-             (make-path mite)
+             (make-path mite screen entities)
              mite)))
 
 ;; Hunter mite
@@ -51,12 +51,12 @@
          :type type))
 
 (defmethod make-path :hunter
-  [mite]
+  [mite screen entities]
   (assoc (turn mite)
          :steps (inc (rand-int 25))))
 
 (defmethod move-mite :hunter
-  [mite]
+  [mite screen entities]
   (advance (if (<= (:steps mite) 0)
-             (make-path mite)
+             (make-path mite screen entities)
              mite)))

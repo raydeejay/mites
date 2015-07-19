@@ -24,7 +24,7 @@
   (fn [screen entities]
     (clear!)
     (render! screen (map #(if (and (:mite %) (:moving %))
-                            (move-mite %)
+                            (move-mite % screen entities)
                             %)
                          entities)))
 
