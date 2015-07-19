@@ -40,7 +40,8 @@
   (dissoc ent :hidden))
 
 (defn polar->cartesian [[distance angle]]
-  [(* distance (Math/cos angle)) (* distance (Math/sin angle))])
+  (let [a (Math/toRadians angle)]
+    [(* distance (Math/cos a)) (* distance (Math/sin a))]))
 
 (defn cartesian->polar [[x y]]
   [(Math/sqrt (+ (* x x) (* y y)))
