@@ -18,7 +18,7 @@
   (fn [screen entities]
     (update! screen :renderer (stage) :camera (orthographic))
     [(label "Mites!!!" (color :white))
-     (assoc (create-mite) :x 400 :y 300)])
+     (assoc (create-mite :basic) :x 400 :y 300)])
 
   :on-render
   (fn [screen entities]
@@ -46,7 +46,9 @@
           (do (debug (count entities))
               nil)
           (= (:key screen) (key-code :a))
-          (conj entities (create-mite))
+          (conj entities (create-mite :basic))
+          (= (:key screen) (key-code :h))
+          (conj entities (create-mite :hunter))
           (= (:key screen) (key-code :q))
           (do (app! :exit)
               nil)
