@@ -10,9 +10,6 @@
 (defonce manager (asset-manager))
 
 
-(defn step-mite [mite]
-  (-> mite move-mite))
-
 (defscreen main-screen
   :on-show
   (fn [screen entities]
