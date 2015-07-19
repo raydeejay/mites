@@ -42,11 +42,8 @@
 ;; Hunter mite
 (defmethod create-mite :hunter
   [type]
-  (assoc (texture "mite.png")
-         :x (rand-int 800) :y (rand-int 600) :width 16 :height 16
-         :mite true
-         :moving false
-         :angle 90
+  (assoc (create-mite :basic)
+         :width 16 :height 16
          :steps 100
          :type type))
 
