@@ -28,7 +28,7 @@
        (> (+ (:height rect1) (:y rect1))
           (:y rect2))
         ;; collision detected! or is it...
-       (not (= (:object rect1) (:object rect2)))))
+       (not (= (:uuid rect1) (:uuid rect2)))))
 
 (defmulti create-mite (fn [mite-type] mite-type))
 (defmulti make-path (fn [mite screen entities] (:type mite)))
