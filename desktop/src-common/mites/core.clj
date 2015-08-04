@@ -9,21 +9,35 @@
 (declare mites-game main-screen)
 (defonce manager (asset-manager))
 
+(defn step-mites
+  [screen mites]
+  (mapv (fn [mite]
+          (cond (some #(= (:object mite) (:object %)) (:dead-mites screen))
+                nil
+                (:moving mite)
+                (move-mite mite screen mites)
+                :else
+                mite))
+        mites))
 
 (defscreen main-screen
   :on-show
   (fn [screen entities]
-    (update! screen :renderer (stage) :camera (orthographic))
+    (update! screen
+             :renderer (stage)
+             :camera (orthographic)
+             :dead-mites '())
     [(label "Mites!!!" (color :white))
      (assoc (create-mite :basic) :x 400 :y 300)])
 
   :on-render
   (fn [screen entities]
     (clear!)
-    (render! screen (map #(if (and (:mite %) (:moving %))
-                            (move-mite % screen entities)
-                            %)
-                         entities)))
+    (let [mites (filter :mite entities)
+          non-mites (remove :mite entities)]
+      (update! screen :dead-mites '())
+      (render! screen (concat (step-mites screen mites)
+                              non-mites))))
 
   :on-resize
   (fn [screen entities]
