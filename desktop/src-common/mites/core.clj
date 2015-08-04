@@ -12,7 +12,7 @@
 (defn step-mites
   [screen mites]
   (mapv (fn [mite]
-          (cond (some #(= (:object mite) (:object %)) (:dead-mites screen))
+          (cond (some #(= (:uuid mite) (:uuid %)) (:dead-mites screen))
                 nil
                 (:moving mite)
                 (move-mite mite screen mites)

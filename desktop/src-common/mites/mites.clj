@@ -4,6 +4,8 @@
             [play-clj.math :refer :all]
             [mites.utils :refer :all]))
 
+(defn uuid [] (str (java.util.UUID/randomUUID)))
+
 (defn bounce
   [mite]
   (let [x (:x mite) y (:y mite) w (:width mite) h (:height mite) angle (:angle mite)]
@@ -45,11 +47,9 @@
       (let [other (some #(if (collide? target %) % nil) entities)]
         (if other
           (do (update! screen :dead-mites (conj (:dead-mites screen) other))
-              ;; (assoc target
-              ;;        :width 16
-              ;;        :height 16)
-              ;; check some UUID instead here!!!
-              target)
+              (assoc target
+                     :width 16
+                     :height 16))
           target)))))
 
 (defn turn
@@ -67,7 +67,8 @@
          :angle 90
          :steps 10
          :type type
-         :speed 1))
+         :speed 1
+         :uuid (uuid)))
 
 (defmethod make-path :basic
   [mite screen entities]
